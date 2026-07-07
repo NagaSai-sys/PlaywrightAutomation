@@ -1,19 +1,19 @@
 const {test,expect} = require('@playwright/test');
 //Test using Context and Page
-test('My First Playwright Test', async ({ browser }) => {
+test('Login Test using context and page', async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto('https://rahulshettyacademy.com/loginpagePractice/');
   console.log(await page.title)
 });
 //Test without Context and Page
-test('My Second Playwright Test', async ({ page }) => {
+test('Login test by directly loading the URL', async ({ page }) => {
   // const context = await browser.newContext();
   // const page = await context.newPage();
   await page.goto('https://google.com');
   await expect(page).toHaveTitle("Google");
 });
-test.only('My third testcase',async({page})=>{
+test.only('E2E test for adding cart Items and checkout',async({page})=>{
   page.on('console', msg => console.log('Browser:', msg.text()));
   await page.goto('https://rahulshettyacademy.com/loginpagePractice/');
   const username=page.locator('#username');
@@ -49,11 +49,17 @@ test.only('My third testcase',async({page})=>{
   }
   await page.locator('.nav-link.btn.btn-primary').click();
   await page.locator('table tbody').first().waitFor();
-  //Automating table scenario
+  //Automating table scenarios
   const addedCartItems=await page.locator('.media-body h4 a').allTextContents();
   console.log(addedCartItems);
   const expectedItems = [ 'iphone X', 'Nokia Edge' ];
   if (expectedItems.every(item => addedCartItems.includes(item))) {
   console.log("True");
   }
+  // const rows=await page.locator('table tbody tr').length;
+  // for(let j=0;j<rows;j++){
+  //   const quantity=await page.locator('table tbody .form-control').nth(j).textContent();
+  //   const price=
+  // }
+
 });
