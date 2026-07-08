@@ -78,3 +78,51 @@ await expect(page).toHaveScreenshot()	            Page has a screenshot
 await expect(page).toHaveTitle()	                Page has a title
 await expect(page).toHaveURL()	                    Page has a URL
 await expect(response).toBeOK()	                    Response has an OK status
+
+Async and Await:
+
+Playwright uses asynchronous APIs because browser actions and assertions take time to complete. By using async and await, we ensure that each action or assertion completes before moving to the next step, resulting in reliable and stable test execution.
+
+# Importance of the playwright.config.js / playwright.config.ts File
+
+The Playwright configuration file is the central place where project-wide settings are defined. Instead of configuring each test individually, common settings are managed in one location, making the framework easier to maintain and scale.
+
+testDir
+
+Specifies the directory that contains all the test files.
+
+testDir: './tests'
+Playwright searches for and executes all test files inside the tests folder.
+timeout
+
+Defines the maximum execution time for each test.
+
+timeout: 40 * 1000 // 40 seconds
+The default timeout for each test is 30 seconds.
+If a test exceeds the configured timeout, Playwright marks it as failed.
+reporter
+
+Specifies the type of test report to generate.
+
+reporter: 'html'
+Generates an interactive HTML report after test execution.
+Open the report using:
+npx playwright show-report
+use
+
+Defines common browser and execution settings that apply to all tests.
+
+use: {
+    browserName: 'chromium', // or 'firefox', 'webkit'
+    headless: true            // true = run without UI, false = run with browser UI
+}
+
+Common options inside use include:
+
+browserName – Selects the browser (chromium, firefox, or webkit).
+headless – Runs the browser in headless (true) or headed (false) mode.
+baseURL – Sets a common URL for all tests.
+viewport – Defines the browser window size.
+screenshot – Captures screenshots on failure or for every test.
+video – Records test execution.
+trace – Captures detailed execution traces for debugging.
